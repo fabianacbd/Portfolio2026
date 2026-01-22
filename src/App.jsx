@@ -1,10 +1,15 @@
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import "./index.css";
+import { useState } from "react";
+
 
 function Header() {
+  const [darkMode, setDarkMode] = useState(false);
+
   const toggleTheme = () => {
     document.body.classList.toggle("dark");
+    setDarkMode(!darkMode);
   };
 
   return (
@@ -17,7 +22,8 @@ function Header() {
           <Link to="/education">Educación</Link>
           <Link to="/experience">Experiencia</Link>
           <Link to="/projects">Proyectos</Link>
-          <button className="theme-btn" onClick={toggleTheme}>🌙</button>
+          <button className="theme-btn" onClick={toggleTheme}>
+            {darkMode ? "☀️" : "🌙"}</button>
         </nav>
       </div>
     </header>
@@ -88,7 +94,7 @@ function Home() {
 
 function About({ preview }) {
   const about = [
-    { title: "Nombre: ", nombre: "Fabiana Barbati",
+    { title: "Nombre: ", nombre: "Fabiana Barbati", email: "Email: ", email1: "fabianabarbaticbd@gmail.com", linkedin: "Linkedin: ", linkedin1: "https://www.linkedin.com/in/fabiana-barbati-4aaa7a243/", github: "Github:", github1: "https://github.com/fabianacbd",
       edad: "Edad: ", edad1: "27", country: "Nacionalidad: ", pais: "Venezuela", description: "Descripcion:", hobbies: "Hobbies: ", hobbies1: "Cine, series, restaurantes, viajes, ejercicio y conocer cosas nuevas.",
       desc: "Soy estudiante de desarrollo de software con interés en la creación de aplicaciones web modernas y bien estructuradas. Me enfoco en aprender y aplicar buenas prácticas de programación, tanto en frontend como en backend, trabajando con tecnologías como React, Java, SQL y MySQL. Me considero una persona responsable, con buena capacidad de aprendizaje y orientada a la resolución de problemas. Busco seguir creciendo profesionalmente, participar en proyectos desafiantes y consolidar mis conocimientos a través de la práctica constante." },
   ];
@@ -96,18 +102,33 @@ function About({ preview }) {
   const shown = preview ? about.slice(0, 2) : about;
 
   return (
-    <Section title="Sobre mi">
+    <Section>
       <div className="grid">
         {shown.map((p, i) => (
           <motion.div key={i} whileHover={{ scale: 1.05 }} className="card">
+            <h2>Sobre mi</h2>
             <h3>{p.title}</h3><p>{p.nombre}</p>
             <h3>{p.edad}</h3><p>{p.edad1}</p>
             <h3>{p.country}</h3><p>{p.pais}</p>
             <h3>{p.description}</h3><p>{p.desc}</p>
             <h3>{p.hobbies}</h3><p>{p.hobbies1}</p>
+      
           </motion.div>
         ))}
       </div>
+
+      <div className="grid">
+        {shown.map((p, i) => (
+          <motion.div key={i} whileHover={{ scale: 1.05 }} className="card">
+            <h2>Contacto</h2>
+            <h3>{p.email}</h3><p>{p.email1}</p>
+            <h3>{p.linkedin}</h3><a href={p.linkedin1}>{p.linkedin1}</a>
+            <h3>{p.github}</h3><a href={p.github1}>{p.github1}</a>
+            
+          </motion.div>
+        ))}
+      </div>
+      
       {preview && <Link className="more" to="/about">Ver todos →</Link>}
     </Section>
   );
@@ -188,12 +209,16 @@ function Projects({ preview }) {
       desc: "HTML + CSS + JavaScript",
       image: "/wishlist.png",
       url: "https://wishlist-f.netlify.app/"},
+      { title: "Studio Ghibli - Web de Peliculas", 
+      desc: "HTML + CSS + JavaScript",
+      image: "/ghibli.png",
+      url: "https://studioghibliremake.vercel.app/"},
   ];
 
   const shown = preview ? projects.slice(0, 2) : projects;
 
   return (
-    <Section title="Proyectos">
+    <Section title="Proyectos más recientes">
       <div className="grid">
         {shown.map((p, i) => (
           <motion.a key={i} href={p.url}  target="_blank" rel="noopener noreferrer" whileHover={{ scale: 1.05 }}  className="card2">

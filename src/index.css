@@ -212,3 +212,50 @@ h3 {
   font-size: 22px;
   color: #8e37a0;
 }
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-links {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.hamburger {
+  display: none;
+  font-size: 2rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .hamburger {
+    display: block;
+  }
+
+  .nav-links {
+    position: absolute;
+    top: 70px;
+    right: 0;
+    background: var(--bg, #fff);
+    flex-direction: column;
+    width: 100%;
+    padding: 1.5rem 0;
+    gap: 1rem;
+    display: none;
+    z-index: 100;
+  }
+
+  .nav-links.open {
+    display: flex;
+  }
+}
+
+body.dark .nav-links {
+  background: #111;
+}

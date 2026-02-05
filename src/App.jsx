@@ -6,6 +6,7 @@ import { useState } from "react";
 
 function Header() {
   const [darkMode, setDarkMode] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const toggleTheme = () => {
     document.body.classList.toggle("dark");
@@ -16,14 +17,24 @@ function Header() {
     <header className="header">
       <div className="container nav">
         <h1 className="logo">Portfolio profesional</h1>
-        <nav>
-          <Link to="/">Home</Link>
-          <Link to="/about">Sobre mí</Link>
-          <Link to="/education">Educación</Link>
-          <Link to="/experience">Experiencia</Link>
-          <Link to="/projects">Proyectos</Link>
+
+        {/* BOTÓN HAMBURGUESA */}
+        <button
+          className="hamburger"
+          onClick={() => setMenuOpen(!menuOpen)}
+        >
+          ☰
+        </button>
+
+        <nav className={menuOpen ? "nav-links open" : "nav-links"}>
+          <Link to="/" onClick={() => setMenuOpen(false)}>Home</Link>
+          <Link to="/about" onClick={() => setMenuOpen(false)}>Sobre mí</Link>
+          <Link to="/education" onClick={() => setMenuOpen(false)}>Educación</Link>
+          <Link to="/experience" onClick={() => setMenuOpen(false)}>Experiencia</Link>
+          <Link to="/projects" onClick={() => setMenuOpen(false)}>Proyectos</Link>
           <button className="theme-btn" onClick={toggleTheme}>
-            {darkMode ? "☀️" : "🌙"}</button>
+            {darkMode ? "☀️" : "🌙"}
+          </button>
         </nav>
       </div>
     </header>
